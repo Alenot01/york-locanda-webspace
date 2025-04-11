@@ -1,1 +1,22 @@
-/* Removing the root styling that might cause overlay issues */
+
+/* Ensuring clean body styles without any overlay */
+body {
+  overflow-x: hidden;
+  pointer-events: auto !important;
+}
+
+/* Fixing dialog overlay issues */
+[data-state="open"] > .fixed.inset-0 {
+  pointer-events: none !important;
+}
+
+/* Allow clicking through dialog overlay */
+[data-radix-popper-content-wrapper] {
+  pointer-events: auto !important;
+  z-index: 999 !important;
+}
+
+/* Ensure dialog content is clickable */
+[role="dialog"] {
+  pointer-events: auto !important;
+}

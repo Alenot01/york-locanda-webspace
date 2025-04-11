@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { Dialog } from '@/components/ui/dialog';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { X } from 'lucide-react';
 
 const galleryImages = [
@@ -110,24 +110,24 @@ const Gallery = () => {
         </div>
       </div>
 
-      {/* Lightbox Dialog */}
-      <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
-        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
-          <button 
-            onClick={() => setSelectedImage(null)}
-            className="absolute top-4 right-4 text-white hover:text-restaurant-terracotta"
-          >
-            <X size={32} />
-          </button>
-          {selectedImage && (
+      {/* Lightbox Dialog - Using DialogContent instead of custom implementation */}
+      {selectedImage && (
+        <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
+          <DialogContent className="max-w-4xl p-0 border-none bg-transparent">
+            <button 
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-2 right-2 z-50 text-white bg-black/50 rounded-full p-1 hover:bg-black/70"
+            >
+              <X size={24} />
+            </button>
             <img 
               src={selectedImage} 
               alt="Gallery image enlarged" 
               className="max-w-full max-h-[90vh] object-contain"
             />
-          )}
-        </div>
-      </Dialog>
+          </DialogContent>
+        </Dialog>
+      )}
     </section>
   );
 };
